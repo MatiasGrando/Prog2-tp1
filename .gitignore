@@ -1,29 +1,51 @@
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
 
-# Precompiled Headers
-*.gch
-*.pch
+#include "stdafx.h"
+#include <fstream>
+#include <iostream>
+#include <string>
+using namespace std;
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+struct Contactos
+  {
+  	string Nombre_Del_Contacto;
+  	string Numero_Del_Contacto;
+  };
+Contactos Vector_De_Contactos[10];
 
-# Fortran module files
-*.mod
-*.smod
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+void main()
+  {	
+  int cantidad_de_contactos,contador_de_lineas = 0;
+  string palabra;
+  cout<<"ingrese la direccion del archivo .txt, la cual debe estar entre comillas doble"<<endl;
+  string Direccion_de_Contactos;
+  cin>>Direccion_de_Contactos;
+  
+  
+  ifstream Lista_de_contactos;
+  Lista_de_contactos.open(Direccion_de_Contactos);
+  
+  while (getline(Lista_de_contactos,palabra)){contador_de_lineas++;};
+  
+  cantidad_de_contactos=(contador_de_lineas/4);
+  
+  Lista_de_contactos.close();
+  Lista_de_contactos.open(Direccion_de_Contactos);
+  for (int i=0;i<cantidad_de_contactos;i++){
+    getline(Lista_de_contactos,palabra);
+    Lista_de_contactos >> palabra;
+    Lista_de_contactos >> palabra;
+    Vector_De_Contactos[i].Numero_Del_Contacto = palabra;
+    Lista_de_contactos >> palabra;
+    Lista_de_contactos >> palabra;
+    Vector_De_Contactos[i].Nombre_Del_Contacto = palabra;
+    cout<<"Contacto "<<i+1<<endl;
+    cout<<Vector_De_Contactos[i].Nombre_Del_Contacto<<endl;
+    cout<<Vector_De_Contactos[i].Numero_Del_Contacto<<endl;
+  };
+  Lista_de_contactos.close();
+  	
+  system("pause");
+  
+  }
 
-# Executables
-*.exe
-*.out
-*.app
